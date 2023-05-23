@@ -2,7 +2,7 @@
 
 Line::Line(QPoint startPos, QPoint endPos, QImage *image)
 {
-    std::cout<<"Line"<<std::endl;
+    //std::cout<<"Line"<<std::endl;
     im = image;
     drawLine(startPos.x(), startPos.y(), endPos.x(), endPos.y());
 }

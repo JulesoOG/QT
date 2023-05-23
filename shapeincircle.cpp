@@ -5,6 +5,9 @@ ShapeInCircle::ShapeInCircle(QPoint startPos, QPoint endPos, int nKontow, QImage
     im = image;
     drawShapeInCircle(startPos.x(), startPos.y(), endPos.x(), endPos.y(), nKontow);
 }
+ShapeInCircle::ShapeInCircle(){
+
+}
 void ShapeInCircle::drawShapeInCircle(int x1, int y1, int x2, int y2, int nKontow)
 {
     int srodekX = (x1+x2)/2;

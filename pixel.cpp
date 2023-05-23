@@ -8,3 +8,5 @@ Pixel::Pixel(int x, int y, int red, int green, int blue)
     this->blue = blue;
     this->green = green;
 }
+
+

@@ -5,13 +5,19 @@
 #include <QImage>
 #include <QPainter>
 #include <QMouseEvent>
+#include <QKeyEvent>
+
+#include <iostream>
+
 #include <vector>
 #include <queue>
-#include <iostream>
+#include <list>
+
 #include "sketch.h"
 #include "line.h"
 #include "shapeincircle.h"
 #include "bezier.h"
+#include "bspline.h"
 
 using namespace std;
 
@@ -22,26 +28,27 @@ class Drawer : public QWidget
 public:
     explicit Drawer(QWidget *parent = nullptr);
     //~Drawer();
-    //void PaintEvent(QPaintEvent *);
-    //void MouseMoveEvent(QMouseEvent *e);
-
-
-    void drawPixel(int x, int y, int r, int g, int b);
-    void drawShapeInCircle(int x1, int y1, int x2, int y2, int nKontow);
-
-    //bool amIDrawing();
-    queue<Sketch> sketches;
-
-    //void drawLine(int x1,int y1,int x2,int y2);
+    void redrawAll(vector<Sketch*> skeachesToRedraw);
+    vector<Sketch*> sketches; //uzywam tablic wskaznikow aby nie kopiowac obiektow, w przeciwnym wypatku destrukto tych obiektow sie wykona
 protected:
     void paintEvent(QPaintEvent *);
     void mouseMoveEvent(QMouseEvent *e);
     void mousePressEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
 
+
 private slots:
 
 private:
+    enum MenuMode
+    {
+        pixelSelected,
+        lineSelected,
+        shapeInCircleSelected,
+        bezierSelected,
+        bSplineSelected
+    };
+    MenuMode menuMode;
 
     //std::queue<Sketch> sketches;
     QImage im, im2;
@@ -49,8 +56,12 @@ private:
 
     vector<QPoint> clickedPoints;
 public slots:
-    void buttonTest();
-
+    //guziki
+    void undoButton();
+    void lineButton();
+    void bezierButton();
+    void shapeInCircleButton();
+    void bSplineButton();
 signals:
 
 };

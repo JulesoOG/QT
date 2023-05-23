@@ -3,7 +3,7 @@
 
 #include <QImage>
 #include <iostream>
-#include <queue>
+#include <vector>
 #include "pixel.h"
 
 using namespace std;
@@ -12,9 +12,14 @@ class Sketch
 {
 public:
     Sketch();
+    ~Sketch();
     void drawPixel(Pixel pixel);
+    void redraw();
+    void clean();
+
     QImage *im;
-    queue<Pixel> pixels;
+    vector<Pixel> pixels;
+private:
 };
 
 #endif // SKETCH_H

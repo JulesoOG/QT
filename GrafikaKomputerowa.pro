@@ -9,7 +9,9 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    actionpoint.cpp \
     bezier.cpp \
+    bspline.cpp \
     drawer.cpp \
     line.cpp \
     main.cpp \
@@ -19,7 +21,9 @@ SOURCES += \
     sketch.cpp
 
 HEADERS += \
+    actionpoint.h \
     bezier.h \
+    bspline.h \
     drawer.h \
     line.h \
     mainwindow.h \
