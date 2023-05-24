@@ -13,6 +13,7 @@ SOURCES += \
     bezier.cpp \
     bspline.cpp \
     drawer.cpp \
+    floodfill.cpp \
     line.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     bezier.h \
     bspline.h \
     drawer.h \
+    floodfill.h \
     line.h \
     mainwindow.h \
     pixel.h \

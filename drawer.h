@@ -40,10 +40,13 @@ protected:
 private slots:
 
 private:
+    int licznik=0;
     enum MenuMode
     {
         pixelSelected,
         lineSelected,
+        circleSelected,
+        floodFillSelected,
         shapeInCircleSelected,
         bezierSelected,
         bSplineSelected
@@ -55,10 +58,14 @@ private:
     QPoint m_startPos, m_endPos;
 
     vector<QPoint> clickedPoints;
+    void createBezier();
 public slots:
     //guziki
     void undoButton();
+    void pixelButton();
     void lineButton();
+    void circleButton();
+    void floodFillButton();
     void bezierButton();
     void shapeInCircleButton();
     void bSplineButton();

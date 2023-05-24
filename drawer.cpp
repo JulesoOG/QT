@@ -137,13 +137,15 @@ void Drawer::mouseReleaseEvent(QMouseEvent *e){
     case bezierSelected:
         clickedPoints.push_back(e->pos());
         cout<<clickedPoints.size()%4<<endl;
-        if(clickedPoints.size()>3)
+        licznik++;
+        if(clickedPoints.size()>3 && licznik>2)
         {
             cout<<clickedPoints[0].x()<<", "<<clickedPoints[1].x()<<", "<<clickedPoints[2].x()<<", "<<clickedPoints[3].x()<<", "<<endl;
             newSketch = new Bezier(20,clickedPoints[clickedPoints.size()-4], clickedPoints[clickedPoints.size()-3], clickedPoints[clickedPoints.size()-2], clickedPoints[clickedPoints.size()-1], &im2);
             im = im2;
             sketches.push_back(newSketch);
             update();
+            licznik=0;
         }
         break;
     case bSplineSelected:
@@ -211,10 +213,27 @@ void Drawer::undoButton()
     update();
 }
 
+void Drawer::pixelButton()
+{
+    cout<<"wybrano pixel"<<endl;
+    menuMode = pixelSelected;
+}
 void Drawer::lineButton()
 {
     cout<<"wybrano linie"<<endl;
     menuMode = lineSelected;
+}
+
+void Drawer::circleButton()
+{
+    cout<<"wybrano circle"<<endl;
+    menuMode = circleSelected;
+}
+
+void Drawer::floodFillButton()
+{
+    cout<<"wybrano flood fill"<<endl;
+    menuMode = floodFillSelected;
 }
 
 void Drawer::shapeInCircleButton(){

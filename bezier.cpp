@@ -8,7 +8,7 @@ Bezier::Bezier(int nLines, QPoint P1, QPoint P2, QPoint P3, QPoint P4, QImage *i
 void Bezier::drawBezier(int nLines, QPoint P1, QPoint P2, QPoint P3, QPoint P4)
 {
     QPoint prevPos = calculatePointOnCurve(0,P1,P2,P3,P4);
-    for(int i=1; i<nLines;i++)
+    for(int i=1; i<=nLines;i++)
     {
         float t = (float)i/nLines;
         QPoint currentPos = calculatePointOnCurve(t,P1,P2,P3,P4);
@@ -18,6 +18,7 @@ void Bezier::drawBezier(int nLines, QPoint P1, QPoint P2, QPoint P3, QPoint P4)
 
         prevPos=currentPos;
     }
+    //drawLine(prevPos.x(), prevPos.y(), P4.x(), P4.y()); wystarczylo zamienic i<nLines na i<=nLines
 }
 
 QPoint Bezier::calculatePointOnCurve(float t ,QPoint P1, QPoint P2, QPoint P3, QPoint P4)
