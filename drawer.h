@@ -20,7 +20,7 @@
 #include "bspline.h"
 #include "actionpoint.h"
 #include "beziercreator.h"
-
+#include "bsplinecreator.h"
 using namespace std;
 
 
@@ -62,7 +62,7 @@ private:
     void createBezier();
 
     BezierCreator *bezierCreator;
-
+    BSplineCreator *bSplineCreator;
 public slots:
     //guziki
     void undoButton();

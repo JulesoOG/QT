@@ -14,6 +14,9 @@ Drawer::Drawer(QWidget *parent) : QWidget{parent}
     if(bezierCreator==NULL){
         bezierCreator = new BezierCreator(&im2);
     }
+    if(bSplineCreator==NULL){
+        bSplineCreator = new BSplineCreator(&im2);
+    }
 }
 /*
 Drawer::~Drawer()
@@ -58,6 +61,17 @@ void Drawer::mousePressEvent(QMouseEvent *e){
         im=im2;
         update();
         break;
+    case bSplineSelected:
+        if (e->buttons() & Qt::LeftButton)
+        {
+            bSplineCreator->addActionPoint(e->pos());
+        }
+        else if(e->buttons() & Qt::RightButton){
+            bSplineCreator->removeActionPoint(e->pos());
+        }
+        im=im2;
+        update();
+        break;
     default:
         break;
     }
@@ -85,37 +99,7 @@ void Drawer::mouseReleaseEvent(QMouseEvent *e){
         sketches.push_back(newSketch);
         update();
         break;
-    case bezierSelected:
 
-
-        /*
-        clickedPoints.push_back(e->pos());
-        cout<<clickedPoints.size()%4<<endl;
-        licznik++;
-        if(clickedPoints.size()>3 && licznik>2)
-        {
-            cout<<clickedPoints[0].x()<<", "<<clickedPoints[1].x()<<", "<<clickedPoints[2].x()<<", "<<clickedPoints[3].x()<<", "<<endl;
-            newSketch = new Bezier(20,clickedPoints[clickedPoints.size()-4], clickedPoints[clickedPoints.size()-3], clickedPoints[clickedPoints.size()-2], clickedPoints[clickedPoints.size()-1], &im2);
-            im = im2;
-            sketches.push_back(newSketch);
-            update();
-            licznik=0;
-        }
-        */
-        break;
-    case bSplineSelected:
-        clickedPoints.push_back(e->pos());
-        cout<<clickedPoints.size()%4<<endl;
-        if(clickedPoints.size()>3)
-        {
-            cout<<clickedPoints[0].x()<<", "<<clickedPoints[1].x()<<", "<<clickedPoints[2].x()<<", "<<clickedPoints[3].x()<<", "<<endl;
-            //newSketch = new BSpline
-            newSketch = new BSpline(20,clickedPoints[clickedPoints.size()-4], clickedPoints[clickedPoints.size()-3], clickedPoints[clickedPoints.size()-2], clickedPoints[clickedPoints.size()-1], &im2);
-            im = im2;
-            sketches.push_back(newSketch);
-            update();
-        }
-        break;
     }
 }
 
@@ -148,6 +132,14 @@ void Drawer::mouseMoveEvent(QMouseEvent *e)
         if (e->buttons() & Qt::LeftButton)
         {
             bezierCreator->moveActionPoint(e->pos());
+            im=im2;
+            update();
+        }
+        break;
+    case bSplineSelected:
+        if (e->buttons() & Qt::LeftButton)
+        {
+            bSplineCreator->moveActionPoint(e->pos());
             im=im2;
             update();
         }

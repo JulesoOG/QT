@@ -24,7 +24,7 @@ void Line::drawLine(int x1,int y1,int x2,int y2)
             std::swap(x1, x2);
             std::swap(y1, y2);
         }
-        for(x=x1; x<x2; x++)
+        for(x=x1; x<=x2; x++)
         {
             y=y1+(x-x1)*(y2-y1)/(x2-x1);
             drawPixel(*(new Pixel(x, y, 200, 200, 200)));
@@ -41,7 +41,7 @@ void Line::drawLine(int x1,int y1,int x2,int y2)
             std::swap(x1, x2);
             std::swap(y1, y2);
         }
-        for(y=y1; y<y2; y++)
+        for(y=y1; y<=y2; y++)
         {
             x=x1+(y-y1)*(x2-x1)/(y2-y1);
             drawPixel(*(new Pixel(x, y, 200, 200, 200)));
