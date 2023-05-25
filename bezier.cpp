@@ -26,7 +26,7 @@ QPoint Bezier::calculatePointOnCurve(float t ,QPoint P1, QPoint P2, QPoint P3, Q
     int x, y;
     x = pow((1-t),3)*P1.x()+3*pow((1-t),2)*P2.x()*t+3*(1-t)*P3.x()*pow(t,2)+pow(t,3)*P4.x();
     y = pow((1-t),3)*P1.y()+3*pow((1-t),2)*P2.y()*t+3*(1-t)*P3.y()*pow(t,2)+pow(t,3)*P4.y();
-    cout<<x<<", "<<y<<endl;
+    //cout<<x<<", "<<y<<endl;
     QPoint resoltPos(x,y);
     return resoltPos;
 }

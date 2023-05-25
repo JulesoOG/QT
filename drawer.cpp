@@ -9,10 +9,13 @@ Drawer::Drawer(QWidget *parent) : QWidget{parent}
 
     //s.drawPixel(10, 10,im, 255,255,255);
     setWindowTitle("Rysowanie pikseli w Qt");
-        setMouseTracking(true);
+    setMouseTracking(true);
 
+    if(bezierCreator==NULL){
+        bezierCreator = new BezierCreator(&im2);
+    }
 }
-/*e
+/*
 Drawer::~Drawer()
 {
     delete im;
@@ -24,70 +27,7 @@ void Drawer::paintEvent(QPaintEvent *)
     QPainter p(this);
     p.fillRect(0,0, width(), height(), Qt::green);
     p.drawImage(0,0,im);
-
 }
-
-/*
-void Drawer::mousePressEvent(QMouseEvent *e){
-    clickedPoints.push_back(e->pos());
-
-    if(clickedPoints.size()>3){
-        cout<<clickedPoints[0].x()<<", "<<clickedPoints[1].x()<<", "<<clickedPoints[2].x()<<", "<<clickedPoints[3].x()<<", "<<endl;
-        new Bezier(20,clickedPoints[0], clickedPoints[1], clickedPoints[2], clickedPoints[3], &im);
-        //new Bezier(20,clickedPoints);
-        //cout<<"moge rysowac bezjera"<<endl;
-        update();
-    }
-}
-//nie wazne ktory przycisk myszy puszcze i tak sie wykona
-void Drawer::mouseReleaseEvent(QMouseEvent *e){
-
-
-}
-
-void Drawer::mouseMoveEvent(QMouseEvent *e)
-{
-
-
-
-}
-*/
-
-//Linia i kolo
-/*
-void Drawer::mousePressEvent(QMouseEvent *e){
-    if (e->buttons() & Qt::LeftButton){
-        m_startPos = e->pos(); //ustawienie początkowej pozycji na miejsce naszego kursora
-    }
-}
-
-void Drawer::mouseReleaseEvent(QMouseEvent *e){
-
-        Sketch *newSketch = NULL;
-        //m_endPos = e->pos(); //ustawienie koncowej pozycji na miejsce naszego kursora
-        newSketch = new Line(m_startPos, m_endPos, &im2);
-        //newSketch = new ShapeInCircle(m_startPos, m_endPos, 360, &im);
-        im = im2;
-
-        sketches.push_back(*newSketch);
-        cout<<sketches.size()<<endl;
-        update();
-}
-
-void Drawer::mouseMoveEvent(QMouseEvent *e)
-{
-
-    if (e->buttons() & Qt::LeftButton) //reakcja na klikniecie lewego przycisku myszy
-    {
-        im=im2;
-        m_endPos = e->pos(); //ustawienie koncowej pozycji na miejsce naszego kursora
-        //new Line(m_startPos, m_endPos, &im);
-        update(); //odświeżenie widgetu
-    }
-
-}
-*/
-
 
 void Drawer::mousePressEvent(QMouseEvent *e){
     switch (menuMode)
@@ -106,6 +46,17 @@ void Drawer::mousePressEvent(QMouseEvent *e){
         {
             m_startPos = e->pos(); //ustawienie początkowej pozycji na miejsce naszego kursora
         }
+        break;
+    case bezierSelected:
+        if (e->buttons() & Qt::LeftButton)
+        {
+            bezierCreator->addActionPoint(e->pos());
+        }
+        else if(e->buttons() & Qt::RightButton){
+            bezierCreator->removeActionPoint(e->pos());
+        }
+        im=im2;
+        update();
         break;
     default:
         break;
@@ -124,7 +75,7 @@ void Drawer::mouseReleaseEvent(QMouseEvent *e){
     case lineSelected:
         newSketch = new Line(m_startPos, m_endPos, &im2);
         im = im2;
-        sketches.emplace_back(newSketch);
+        sketches.push_back(newSketch); //emplace_back
         //cout<<"sketches.emplace_back(*newSketch)"<<endl;
         update();
         break;
@@ -135,6 +86,9 @@ void Drawer::mouseReleaseEvent(QMouseEvent *e){
         update();
         break;
     case bezierSelected:
+
+
+        /*
         clickedPoints.push_back(e->pos());
         cout<<clickedPoints.size()%4<<endl;
         licznik++;
@@ -147,6 +101,7 @@ void Drawer::mouseReleaseEvent(QMouseEvent *e){
             update();
             licznik=0;
         }
+        */
         break;
     case bSplineSelected:
         clickedPoints.push_back(e->pos());
@@ -190,7 +145,12 @@ void Drawer::mouseMoveEvent(QMouseEvent *e)
         }
         break;
     case bezierSelected:
-
+        if (e->buttons() & Qt::LeftButton)
+        {
+            bezierCreator->moveActionPoint(e->pos());
+            im=im2;
+            update();
+        }
         break;
     }
 

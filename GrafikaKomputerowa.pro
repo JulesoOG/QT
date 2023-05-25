@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     actionpoint.cpp \
     bezier.cpp \
+    beziercreator.cpp \
     bspline.cpp \
     drawer.cpp \
     floodfill.cpp \
@@ -18,18 +19,21 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     pixel.cpp \
+    pixelmetrics.cpp \
     shapeincircle.cpp \
     sketch.cpp
 
 HEADERS += \
     actionpoint.h \
     bezier.h \
+    beziercreator.h \
     bspline.h \
     drawer.h \
     floodfill.h \
     line.h \
     mainwindow.h \
     pixel.h \
+    pixelmetrics.h \
     shapeincircle.h \
     sketch.h
 

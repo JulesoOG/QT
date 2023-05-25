@@ -7,6 +7,7 @@ class FloodFill : public Sketch
 {
 public:
     FloodFill();
+    //void drawFloodFill();
 };
 
 #endif // FLOODFILL_H

@@ -18,6 +18,8 @@
 #include "shapeincircle.h"
 #include "bezier.h"
 #include "bspline.h"
+#include "actionpoint.h"
+#include "beziercreator.h"
 
 using namespace std;
 
@@ -40,7 +42,6 @@ protected:
 private slots:
 
 private:
-    int licznik=0;
     enum MenuMode
     {
         pixelSelected,
@@ -59,6 +60,9 @@ private:
 
     vector<QPoint> clickedPoints;
     void createBezier();
+
+    BezierCreator *bezierCreator;
+
 public slots:
     //guziki
     void undoButton();

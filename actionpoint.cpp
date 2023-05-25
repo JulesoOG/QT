@@ -1,14 +1,19 @@
 #include "actionpoint.h"
 
-ActionPoint::ActionPoint(QImage *image)
+ActionPoint::ActionPoint(QPoint pos, int radius, QImage *image)
 {
     im = image;
+    this->pos = pos;
+    this->radius=radius;
+    drawActionPoint(this->pos,this->radius);
 }
-void ActionPoint:: activate(){
-    QPoint leftUpperCorner(pos.x()-10,pos.y()-10);
-    QPoint rightUpperCorner(pos.x()+10,pos.y()+10);
-    new ShapeInCircle(leftUpperCorner,rightUpperCorner,4,im);
-}
-void ActionPoint:: deactivate(){
 
+void ActionPoint::drawActionPoint(QPoint pos, int radius){
+    QPoint leftUpperCorner(pos.x()-radius,pos.y()-radius);
+    QPoint rightUpperCorner(pos.x()+radius,pos.y()+radius);
+    //new ShapeInCircle(leftUpperCorner,rightUpperCorner,4,im);
+    drawShapeInCircle(leftUpperCorner.x(), leftUpperCorner.y(), rightUpperCorner.x(),rightUpperCorner.y(),4);
 }
+
+
+

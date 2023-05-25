@@ -6,11 +6,14 @@
 class ActionPoint : public ShapeInCircle
 {
 public:
-    ActionPoint(QImage *image);
-    void activate();
-    void deactivate();
+    ActionPoint(QPoint pos, int radius, QImage *image);
+
+     void drawActionPoint(QPoint pos,int radius);
 
     QPoint pos;
+    int radius;
+private:
+
 };
 
 #endif // ACTIONPOINT_H

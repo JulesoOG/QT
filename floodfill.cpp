@@ -4,6 +4,9 @@ FloodFill::FloodFill()
 {
 
 }
+
+//void FloodFill::drawFloodFill(int x,int y,background)
+
 /*
 void FloodFill::drawFloodFill(x,y,zamieniany_kolor,nowy_kolor)
 {
