@@ -7,10 +7,10 @@
 class BezierCreator : public CurveCreator
 {
 public:
-    BezierCreator(QImage *image);
+    BezierCreator(QRgb colorRGB,QImage *image);
     void drawCurves() override;
-private:
-    //int bezierPointsCounter=0;
+    QRgb curveColor;
+
 };
 
 #endif // BEZIERCREATOR_H

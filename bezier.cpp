@@ -1,11 +1,11 @@
 #include "bezier.h"
 
-Bezier::Bezier(int nLines, QPoint P1, QPoint P2, QPoint P3, QPoint P4, QImage *image)
+Bezier::Bezier(int nLines, QPoint P1, QPoint P2, QPoint P3, QPoint P4,QRgb colorRGB, QImage *image)
 {
     im = image;
-    drawBezier(nLines,P1,P2,P3,P4);
+    drawBezier(nLines,P1,P2,P3,P4,colorRGB);
 }
-void Bezier::drawBezier(int nLines, QPoint P1, QPoint P2, QPoint P3, QPoint P4)
+void Bezier::drawBezier(int nLines, QPoint P1, QPoint P2, QPoint P3, QPoint P4,QRgb colorRGB)
 {
     QPoint prevPos = calculatePointOnCurve(0,P1,P2,P3,P4);
     for(int i=1; i<=nLines;i++)
@@ -14,7 +14,7 @@ void Bezier::drawBezier(int nLines, QPoint P1, QPoint P2, QPoint P3, QPoint P4)
         QPoint currentPos = calculatePointOnCurve(t,P1,P2,P3,P4);
 
         //drawPixel(Pixel(currentPos.x(),currentPos.y(),255,255,255));
-        drawLine(prevPos.x(),prevPos.y(),currentPos.x(),currentPos.y());
+        drawLine(prevPos.x(),prevPos.y(),currentPos.x(),currentPos.y(),colorRGB);
 
         prevPos=currentPos;
     }

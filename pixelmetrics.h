@@ -9,7 +9,7 @@ class PixelMetrics
 {
 public:
     static int calculateDisntance(QPoint firstPos, QPoint secondPos);
-    static Pixel* findAdjacentPixels(QPoint pos, QImage *im);
+    //static Pixel* findAdjacentPixels(QPoint pos, QImage *im);
 };
 
 #endif // PIXELMETRICS_H

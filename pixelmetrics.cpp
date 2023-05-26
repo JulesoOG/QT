@@ -4,6 +4,7 @@ int PixelMetrics::calculateDisntance(QPoint firstPos, QPoint secondPos){
     return sqrt((firstPos.x()-secondPos.x())*(firstPos.x()-secondPos.x())+(firstPos.y()-secondPos.y())*(firstPos.y()-secondPos.y()));
 }
 
+/*
 Pixel* PixelMetrics::findAdjacentPixels(QPoint pos, QImage *im){
     Pixel adjacentPixels[8];
     adjacentPixels[0].SetValues(pos.x(),pos.y()+1,0,0,0);
@@ -27,5 +28,5 @@ Pixel* PixelMetrics::findAdjacentPixels(QPoint pos, QImage *im){
 
 
 }
-
+*/
 

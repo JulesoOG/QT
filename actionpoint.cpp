@@ -12,7 +12,8 @@ void ActionPoint::drawActionPoint(QPoint pos, int radius){
     QPoint leftUpperCorner(pos.x()-radius,pos.y()-radius);
     QPoint rightUpperCorner(pos.x()+radius,pos.y()+radius);
     //new ShapeInCircle(leftUpperCorner,rightUpperCorner,4,im);
-    drawShapeInCircle(leftUpperCorner.x(), leftUpperCorner.y(), rightUpperCorner.x(),rightUpperCorner.y(),4);
+
+    drawShapeInCircle(leftUpperCorner.x(), leftUpperCorner.y(), rightUpperCorner.x(),rightUpperCorner.y(),4, qRgb(255,255,255));
 }
 
 

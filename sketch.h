@@ -2,6 +2,7 @@
 #define SKETCH_H
 
 #include <QImage>
+
 #include <iostream>
 #include <vector>
 #include "pixel.h"
@@ -14,6 +15,7 @@ public:
     Sketch();
     ~Sketch();
     void drawPixel(Pixel pixel);
+    void drawPixel(int x, int y, QRgb colorRGB);
     void redraw();
     void clean();
 

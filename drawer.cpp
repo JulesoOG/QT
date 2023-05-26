@@ -3,6 +3,8 @@
 
 Drawer::Drawer(QWidget *parent) : QWidget{parent}
 {
+    brashColorRGB = qRgb(255,255,255);
+
     im = QImage(720, 720, QImage::Format_RGB32);
     im.fill(0);
     im2 = QImage(720, 720, QImage::Format_RGB32);
@@ -11,12 +13,7 @@ Drawer::Drawer(QWidget *parent) : QWidget{parent}
     setWindowTitle("Rysowanie pikseli w Qt");
     setMouseTracking(true);
 
-    if(bezierCreator==NULL){
-        bezierCreator = new BezierCreator(&im2);
-    }
-    if(bSplineCreator==NULL){
-        bSplineCreator = new BSplineCreator(&im2);
-    }
+    //new Circle(QPoint(50,50),QPoint(30,30), &im);
 }
 /*
 Drawer::~Drawer()
@@ -41,16 +38,25 @@ void Drawer::mousePressEvent(QMouseEvent *e){
     case lineSelected:
         if (e->buttons() & Qt::LeftButton)
         {
-            m_startPos = e->pos(); //ustawienie początkowej pozycji na miejsce naszego kursora
+            m_startPos = e->pos();
+        }
+        break;
+    case circleSelected:
+        if (e->buttons() & Qt::LeftButton)
+        {
+            m_startPos = e->pos();
         }
         break;
     case shapeInCircleSelected:
         if (e->buttons() & Qt::LeftButton)
         {
-            m_startPos = e->pos(); //ustawienie początkowej pozycji na miejsce naszego kursora
+            m_startPos = e->pos();
         }
         break;
     case bezierSelected:
+        if(bezierCreator==NULL){
+            bezierCreator = new BezierCreator(brashColorRGB,&im2);
+        }
         if (e->buttons() & Qt::LeftButton)
         {
             bezierCreator->addActionPoint(e->pos());
@@ -61,7 +67,11 @@ void Drawer::mousePressEvent(QMouseEvent *e){
         im=im2;
         update();
         break;
-    case bSplineSelected:
+    case bSplineSelected:        
+        if(bSplineCreator==NULL){
+            bSplineCreator = new BSplineCreator(brashColorRGB,&im2);
+        }
+
         if (e->buttons() & Qt::LeftButton)
         {
             bSplineCreator->addActionPoint(e->pos());
@@ -71,6 +81,14 @@ void Drawer::mousePressEvent(QMouseEvent *e){
         }
         im=im2;
         update();
+        break;
+    case floodFillSelected:
+        if (e->buttons() & Qt::LeftButton)
+        {
+            sketches.push_back(new FloodFill(e->pos(),brashColorRGB, im.pixel(e->pos().x(),e->pos().y()) ,&im2));
+            im=im2;
+            update();
+        }
         break;
     default:
         break;
@@ -87,17 +105,27 @@ void Drawer::mouseReleaseEvent(QMouseEvent *e){
 
         break;
     case lineSelected:
-        newSketch = new Line(m_startPos, m_endPos, &im2);
+        newSketch = new Line(m_startPos, m_endPos,brashColorRGB,&im2);
         im = im2;
         sketches.push_back(newSketch); //emplace_back
         //cout<<"sketches.emplace_back(*newSketch)"<<endl;
         update();
         break;
-    case shapeInCircleSelected:
-        newSketch = new ShapeInCircle(m_startPos, m_endPos, 360, &im2);
+    case circleSelected:
+
+        newSketch = new Circle(m_startPos, m_endPos,brashColorRGB, &im2);
         im = im2;
         sketches.push_back(newSketch);
         update();
+
+        break;
+    case shapeInCircleSelected:
+
+        newSketch = new ShapeInCircle(m_startPos, m_endPos, 360, brashColorRGB, &im2);
+        im = im2;
+        sketches.push_back(newSketch);
+        update();
+
         break;
 
     }
@@ -115,18 +143,30 @@ void Drawer::mouseMoveEvent(QMouseEvent *e)
         {
             im=im2;
             m_endPos = e->pos(); //ustawienie koncowej pozycji na miejsce naszego kursora
-            new Line(m_startPos, m_endPos, &im);
+            new Line(m_startPos, m_endPos,brashColorRGB, &im);
             update(); //odświeżenie widgetu
         }
         break;
-    case shapeInCircleSelected:
+    case circleSelected:
+
         if (e->buttons() & Qt::LeftButton) //reakcja na klikniecie lewego przycisku myszy
         {
             im=im2;
             m_endPos = e->pos(); //ustawienie koncowej pozycji na miejsce naszego kursora
-            new ShapeInCircle(m_startPos, m_endPos, 360, &im);
+            new Circle(m_startPos, m_endPos,brashColorRGB, &im);
             update(); //odświeżenie widgetu
         }
+        break;
+    case shapeInCircleSelected:
+
+        if (e->buttons() & Qt::LeftButton) //reakcja na klikniecie lewego przycisku myszy
+        {
+            im=im2;
+            m_endPos = e->pos(); //ustawienie koncowej pozycji na miejsce naszego kursora
+            new ShapeInCircle(m_startPos, m_endPos, 360,brashColorRGB, &im);
+            update(); //odświeżenie widgetu
+        }
+
         break;
     case bezierSelected:
         if (e->buttons() & Qt::LeftButton)
@@ -157,12 +197,20 @@ void Drawer::redrawAll(vector<Sketch*> skeachesToRedraw)
 
 void Drawer::undoButton()
 {
-    delete sketches.back(); //usuwam obiekt
-    sketches.pop_back(); //usuwam wskaznik na obiekt a nie sam obiekt bez powyzszej linjki nie wywola by sie destruktor
-    cout<<sketches.size()<<endl;
-    redrawAll(sketches);
-    im = im2;
-    update();
+    if(sketches.size()>0)
+    {
+        delete sketches.back(); //usuwam obiekt
+        sketches.pop_back(); //usuwam wskaznik na obiekt a nie sam obiekt bez powyzszej linjki nie wywola by sie destruktor
+        redrawAll(sketches);
+        im = im2;
+        update();
+    }
+}
+
+void Drawer::colorButton()
+{
+    cout<<"wybrano kolor"<<endl;
+    brashColorRGB=(QColorDialog::getColor(Qt::white, this, "Choose Color")).rgb();
 }
 
 void Drawer::pixelButton()

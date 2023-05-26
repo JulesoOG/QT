@@ -1,8 +1,8 @@
 #include "pixel.h"
 
-Pixel::Pixel(int x, int y, int red, int green, int blue)
+Pixel::Pixel(int x, int y, QRgb colorRGB)
 {
-   SetValues(x,y,red,green,blue);
+   SetValues(x,y,colorRGB);
 }
 
 Pixel::Pixel()
@@ -10,11 +10,9 @@ Pixel::Pixel()
 
 }
 
-void Pixel::SetValues(int x, int y, int red, int green, int blue){
+void Pixel::SetValues(int x, int y,QRgb colorRGB){
     this->x = x;
     this->y = y;
-    this->red = red;
-    this->blue = blue;
-    this->green = green;
+    this->colorRGB = colorRGB;
 }
 

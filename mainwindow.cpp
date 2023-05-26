@@ -8,6 +8,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) , ui(new Ui::MainW
     connect(ui->UndoButton,SIGNAL(clicked()),ui->widget,SLOT(undoButton()));
     ui->UndoButton->setStyleSheet("QPushButton { background-color: white; font-weight: bold; border: 2px solid black;} \QPushButton:hover { background-color: rgba(255, 255, 255, 0.4);}");
 
+    connect(ui->ColorButton,SIGNAL(clicked()),ui->widget,SLOT(colorButton()));
+    ui->ColorButton->setStyleSheet("QPushButton { background-color: white; font-weight: bold; border: 2px solid black;} \QPushButton:hover { background-color: rgba(255, 255, 255, 0.4);}");
+
     connect(ui->PixelButton,SIGNAL(clicked()),ui->widget,SLOT(pixelButton()));
     ui->PixelButton->setStyleSheet("QPushButton { background-color: white; font-weight: bold; border: 2px solid black;} \QPushButton:hover { background-color: rgba(255, 255, 255, 0.4);}");
 

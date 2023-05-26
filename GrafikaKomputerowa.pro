@@ -14,6 +14,7 @@ SOURCES += \
     beziercreator.cpp \
     bspline.cpp \
     bsplinecreator.cpp \
+    circle.cpp \
     curvecreator.cpp \
     drawer.cpp \
     floodfill.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     beziercreator.h \
     bspline.h \
     bsplinecreator.h \
+    circle.h \
     curvecreator.h \
     drawer.h \
     floodfill.h \

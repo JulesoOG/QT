@@ -1,14 +1,14 @@
 #include "shapeincircle.h"
 
-ShapeInCircle::ShapeInCircle(QPoint startPos, QPoint endPos, int nKontow, QImage *image)
+ShapeInCircle::ShapeInCircle(QPoint startPos, QPoint endPos, int nKontow,QRgb colorRGB, QImage *image)
 {
     im = image;
-    drawShapeInCircle(startPos.x(), startPos.y(), endPos.x(), endPos.y(), nKontow);
+    drawShapeInCircle(startPos.x(), startPos.y(), endPos.x(), endPos.y(), nKontow, colorRGB);
 }
 ShapeInCircle::ShapeInCircle(){
 
 }
-void ShapeInCircle::drawShapeInCircle(int x1, int y1, int x2, int y2, int nKontow)
+void ShapeInCircle::drawShapeInCircle(int x1, int y1, int x2, int y2, int nKontow,QRgb colorRGB)
 {
     int srodekX = (x1+x2)/2;
     int srodekY = (y1+y2)/2;
@@ -23,7 +23,7 @@ void ShapeInCircle::drawShapeInCircle(int x1, int y1, int x2, int y2, int nKonto
         alpha = 6.28 * i/nKontow; // 2Pi/n*i
         x = rPoziom * cos(alpha);
         y = rPion * sin(alpha);
-        drawLine(x+srodekX,y+srodekY,xOld+srodekX,yOld+srodekY);
+        drawLine(x+srodekX,y+srodekY,xOld+srodekX,yOld+srodekY,colorRGB);
         xOld=x;
         yOld=y;
     }

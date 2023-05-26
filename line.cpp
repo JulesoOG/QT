@@ -1,16 +1,16 @@
 #include "line.h"
 
-Line::Line(QPoint startPos, QPoint endPos, QImage *image)
+Line::Line(QPoint startPos, QPoint endPos, QRgb colorRGB, QImage *image)
 {
     //std::cout<<"Line"<<std::endl;
     im = image;
-    drawLine(startPos.x(), startPos.y(), endPos.x(), endPos.y());
+    drawLine(startPos.x(), startPos.y(), endPos.x(), endPos.y(), colorRGB);
 }
 
 Line::Line(){
 
 }
-void Line::drawLine(int x1,int y1,int x2,int y2)
+void Line::drawLine(int x1,int y1,int x2,int y2, QRgb colorRGB)
 {
     int x, y;
     if(abs(y2-y1) <= abs(x2-x1))
@@ -24,10 +24,10 @@ void Line::drawLine(int x1,int y1,int x2,int y2)
             std::swap(x1, x2);
             std::swap(y1, y2);
         }
-        for(x=x1; x<=x2; x++)
+        for(x=x1; x<x2; x++)
         {
             y=y1+(x-x1)*(y2-y1)/(x2-x1);
-            drawPixel(*(new Pixel(x, y, 200, 200, 200)));
+            drawPixel(*(new Pixel(x, y, colorRGB)));
         }
     }
     else
@@ -41,10 +41,10 @@ void Line::drawLine(int x1,int y1,int x2,int y2)
             std::swap(x1, x2);
             std::swap(y1, y2);
         }
-        for(y=y1; y<=y2; y++)
+        for(y=y1; y<y2; y++)
         {
             x=x1+(y-y1)*(x2-x1)/(y2-y1);
-            drawPixel(*(new Pixel(x, y, 200, 200, 200)));
+            drawPixel(*(new Pixel(x, y, colorRGB)));
         }
     }
 }

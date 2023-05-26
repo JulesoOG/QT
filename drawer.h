@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
+#include <QColorDialog>
 
 #include <iostream>
 
@@ -15,12 +16,15 @@
 
 #include "sketch.h"
 #include "line.h"
+#include "circle.h"
 #include "shapeincircle.h"
 #include "bezier.h"
 #include "bspline.h"
 #include "actionpoint.h"
 #include "beziercreator.h"
 #include "bsplinecreator.h"
+#include "floodfill.h"
+
 using namespace std;
 
 
@@ -32,6 +36,7 @@ public:
     //~Drawer();
     void redrawAll(vector<Sketch*> skeachesToRedraw);
     vector<Sketch*> sketches; //uzywam tablic wskaznikow aby nie kopiowac obiektow, w przeciwnym wypatku destrukto tych obiektow sie wykona
+    QRgb brashColorRGB;
 protected:
     void paintEvent(QPaintEvent *);
     void mouseMoveEvent(QMouseEvent *e);
@@ -66,6 +71,7 @@ private:
 public slots:
     //guziki
     void undoButton();
+    void colorButton();
     void pixelButton();
     void lineButton();
     void circleButton();
