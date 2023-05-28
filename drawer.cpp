@@ -90,6 +90,15 @@ void Drawer::mousePressEvent(QMouseEvent *e){
             update();
         }
         break;
+    case scanLineSelected:
+        if (e->buttons() & Qt::LeftButton)
+        {
+            scanLine->addActionPoint(e->pos());
+        }
+        else if(e->buttons() & Qt::RightButton){
+            sketches.push_back(scanLine->drawScanLine(brashColorRGB));
+        }
+        break;
     default:
         break;
     }
@@ -250,6 +259,12 @@ void Drawer::bSplineButton()
 {
     cout<<"wybrano b-Spline"<<endl;
     menuMode = bSplineSelected;
+}
+
+void Drawer::scanLineButton(){
+    cout<<"wybrano scan line"<<endl;
+    menuMode = scanLineSelected;
+    scanLine = new ScanLine(&im2);
 }
 
 

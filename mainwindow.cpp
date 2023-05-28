@@ -32,6 +32,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) , ui(new Ui::MainW
     connect(ui->BSplineButton,SIGNAL(clicked()),ui->widget,SLOT(bSplineButton()));
     ui->BSplineButton->setStyleSheet("QPushButton { background-color: white; font-weight: bold; border: 2px solid black;} \QPushButton:hover { background-color: rgba(255, 255, 255, 0.4);}");
 
+    connect(ui->ScanLineButton,SIGNAL(clicked()),ui->widget,SLOT(scanLineButton()));
+    ui->ScanLineButton->setStyleSheet("QPushButton { background-color: white; font-weight: bold; border: 2px solid black;} \QPushButton:hover { background-color: rgba(255, 255, 255, 0.4);}");
 }
 
 MainWindow::~MainWindow()

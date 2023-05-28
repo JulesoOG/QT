@@ -24,6 +24,7 @@
 #include "beziercreator.h"
 #include "bsplinecreator.h"
 #include "floodfill.h"
+#include "scanline.h"
 
 using namespace std;
 
@@ -55,7 +56,8 @@ private:
         floodFillSelected,
         shapeInCircleSelected,
         bezierSelected,
-        bSplineSelected
+        bSplineSelected,
+        scanLineSelected
     };
     MenuMode menuMode;
 
@@ -68,6 +70,8 @@ private:
 
     BezierCreator *bezierCreator;
     BSplineCreator *bSplineCreator;
+    ScanLine *scanLine;
+
 public slots:
     //guziki
     void undoButton();
@@ -79,6 +83,7 @@ public slots:
     void bezierButton();
     void shapeInCircleButton();
     void bSplineButton();
+    void scanLineButton();
 signals:
 
 };

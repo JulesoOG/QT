@@ -23,6 +23,7 @@ SOURCES += \
     mainwindow.cpp \
     pixel.cpp \
     pixelmetrics.cpp \
+    scanline.cpp \
     shapeincircle.cpp \
     sketch.cpp
 
@@ -40,6 +41,7 @@ HEADERS += \
     mainwindow.h \
     pixel.h \
     pixelmetrics.h \
+    scanline.h \
     shapeincircle.h \
     sketch.h
 

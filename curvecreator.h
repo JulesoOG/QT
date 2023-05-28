@@ -16,6 +16,7 @@ public:
     void removeActionPoint(QPoint pos);
     void redrawAll(vector<ActionPoint*> skeachesToRedraw);
     void eraiseCurves();
+    void hidePoints(vector<ActionPoint*> polygonPoints);
     vector<Sketch*> curvesSketches;
 
 
