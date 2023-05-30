@@ -74,7 +74,7 @@ void CurveCreator::redrawAll(vector<ActionPoint*> skeachesToRedraw)
     }
 }
 
-void hidePoints(vector<ActionPoint*> polygonPoints)
+void CurveCreator::hidePoints(vector<ActionPoint*> polygonPoints)
 {
     for(int i = 0;i<(int)polygonPoints.size();i++){
         polygonPoints[i]->clean();

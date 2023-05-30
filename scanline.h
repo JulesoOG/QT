@@ -3,9 +3,9 @@
 
 #include<vector>
 
+#include "actionpoint.h"
 #include "line.h"
 #include "curvecreator.h"
-
 
 class ScanLine:public Line, public CurveCreator
 {

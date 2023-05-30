@@ -6,12 +6,12 @@ ScanLine::ScanLine(QImage *image)
 }
 
 void ScanLine::drawCurves(){
-    cout<<"ScanLine drawCurves"<<endl;
+//    cout<<"ScanLine drawCurves"<<endl;
 }
 
 ScanLine* ScanLine::drawScanLine(QRgb colorRGB)
 {
-    return this;
+    //return this;
     hidePoints(actionPoints);
 
     QVector<int> x; // Wektor przechowujący współrzędne x
@@ -34,7 +34,7 @@ ScanLine* ScanLine::drawScanLine(QRgb colorRGB)
 
     for (int y = yMin; y <= yMax; y++)
     {
-        for (int i = 0; i < actionPoints.size(); i++)
+        for (int i = 0; i <(int)actionPoints.size(); i++)
         {
             p1 = i;
             p2 = (i + 1) % actionPoints.size(); // Zapewnienie działania dla ostatniego punktu
@@ -63,6 +63,6 @@ ScanLine* ScanLine::drawScanLine(QRgb colorRGB)
 
         x.clear(); // Wyczyść wektor x
     }
-
+    return this;
 }
 
