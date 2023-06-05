@@ -3,6 +3,7 @@
 ScanLine::ScanLine(QImage *image)
 {
     Sketch::im=image;
+    CurveCreator::im = image;
 }
 
 void ScanLine::drawCurves(){
@@ -11,6 +12,7 @@ void ScanLine::drawCurves(){
 
 ScanLine* ScanLine::drawScanLine(QRgb colorRGB)
 {
+
     //return this;
     hidePoints(actionPoints);
 
@@ -63,6 +65,8 @@ ScanLine* ScanLine::drawScanLine(QRgb colorRGB)
 
         x.clear(); // Wyczyść wektor x
     }
+
+
     return this;
 }
 

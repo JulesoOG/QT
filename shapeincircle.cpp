@@ -26,5 +26,6 @@ void ShapeInCircle::drawShapeInCircle(int x1, int y1, int x2, int y2, int nKonto
         drawLine(x+srodekX,y+srodekY,xOld+srodekX,yOld+srodekY,colorRGB);
         xOld=x;
         yOld=y;
+        //cout<<"srodekX: "<<srodekX<<", x: "<<x<<", srodekY: "<<srodekY<<", y: "<<y<<", xOld: "<<xOld<<", yOld: "<<yOld<<endl;
     }
 }

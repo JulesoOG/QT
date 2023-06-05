@@ -5,13 +5,20 @@ CurveCreator::CurveCreator()
 
 }
 
+CurveCreator::~CurveCreator(){
+    cout<<"CurveCreator destroyer"<<endl;
+    for (auto it = actionPoints.begin(); it != actionPoints.end(); ++it) {
+        delete *it;
+    }
+    actionPoints.clear();
+}
+
 ActionPoint* CurveCreator::getActionPoint(QPoint pos)
 {
-    if(actionPoints.size()>0){
-        for(int i = 0;i<(int)actionPoints.size(); i++){
-            if(PixelMetrics::calculateDisntance(pos, actionPoints[i]->pos)<actionPoints[i]->radius){
-                return actionPoints[i];
-            }
+    if(actionPoints.empty()) return NULL;
+    for(int i = 0;i<(int)actionPoints.size(); i++){
+        if(PixelMetrics::calculateDisntance(pos, actionPoints[i]->pos)<actionPoints[i]->radius){
+            return actionPoints[i];
         }
     }
     return NULL;

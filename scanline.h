@@ -7,7 +7,7 @@
 #include "line.h"
 #include "curvecreator.h"
 
-class ScanLine:public Line, public CurveCreator
+class ScanLine: public CurveCreator, public Line
 {
 public:
     ScanLine(QImage *image);

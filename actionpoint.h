@@ -7,7 +7,7 @@ class ActionPoint : public ShapeInCircle
 {
 public:
     ActionPoint(QPoint pos, int radius, QImage *image);
-
+    ActionPoint();
      void drawActionPoint(QPoint pos,int radius);
 
     QPoint pos;

@@ -2,14 +2,16 @@
 #define CURVECREATOR_H
 
 #include "sketch.h"
-#include "pixelmetrics.h"
 #include "actionpoint.h"
+#include "pixelmetrics.h"
+
 
 class CurveCreator
 {
 public:
     QImage *im;
-
+    CurveCreator();
+    ~CurveCreator();
     ActionPoint* getActionPoint(QPoint pos);
     void moveActionPoint(QPoint pos);
     void addActionPoint(QPoint pos);
@@ -26,7 +28,7 @@ public:
 protected:
     //protected konstruktor gdyz ta klasa nie powinna istniec samodzeilnie
     //jest jedynie rodzicem
-    CurveCreator();
+
 };
 
 

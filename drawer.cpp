@@ -9,11 +9,12 @@ Drawer::Drawer(QWidget *parent) : QWidget{parent}
     im.fill(0);
     im2 = QImage(720, 720, QImage::Format_RGB32);
 
-    //s.drawPixel(10, 10,im, 255,255,255);
     setWindowTitle("Rysowanie pikseli w Qt");
     setMouseTracking(true);
 
-    //new Circle(QPoint(50,50),QPoint(30,30), &im);
+    scanLine = new ScanLine(&im2);
+
+    new ShapeInCircle(QPoint(10,10),QPoint(150,150), 16,brashColorRGB,&im);
 }
 /*
 Drawer::~Drawer()
@@ -33,7 +34,10 @@ void Drawer::mousePressEvent(QMouseEvent *e){
     switch (menuMode)
     {
     case pixelSelected:
-
+        if (e->buttons() & Qt::LeftButton)
+        {
+            cout<<"x = "<<e->pos().x()<<"y = "<<e->pos().y()<<endl;
+        }
         break;
     case lineSelected:
         if (e->buttons() & Qt::LeftButton)
@@ -93,11 +97,19 @@ void Drawer::mousePressEvent(QMouseEvent *e){
     case scanLineSelected:
         if (e->buttons() & Qt::LeftButton)
         {
+
+            //cout<<scanLine->actionPoints.size()<<endl;
             scanLine->addActionPoint(e->pos());
         }
         else if(e->buttons() & Qt::RightButton){
-            sketches.push_back(scanLine->drawScanLine(brashColorRGB));
+            //scanLine->drawScanLine(brashColorRGB);
+            //sketches.push_back(scanLine->drawScanLine(brashColorRGB));
+            scanLine->drawScanLine(brashColorRGB);
+            sketches.push_back(scanLine);
+            scanLine = new ScanLine(&im2);
         }
+        im=im2;
+        update();
         break;
     default:
         break;
@@ -129,8 +141,8 @@ void Drawer::mouseReleaseEvent(QMouseEvent *e){
 
         break;
     case shapeInCircleSelected:
-
-        newSketch = new ShapeInCircle(m_startPos, m_endPos, 360, brashColorRGB, &im2);
+        m_endPos=e->pos();
+        newSketch = new ShapeInCircle(m_startPos, m_endPos, 6, brashColorRGB, &im2);
         im = im2;
         sketches.push_back(newSketch);
         update();
@@ -170,10 +182,10 @@ void Drawer::mouseMoveEvent(QMouseEvent *e)
 
         if (e->buttons() & Qt::LeftButton) //reakcja na klikniecie lewego przycisku myszy
         {
-            im=im2;
+            //im=im2;
             m_endPos = e->pos(); //ustawienie koncowej pozycji na miejsce naszego kursora
-            new ShapeInCircle(m_startPos, m_endPos, 360,brashColorRGB, &im);
-            update(); //odświeżenie widgetu
+            //new ShapeInCircle(m_startPos, m_endPos, 360,brashColorRGB, &im);
+            //update(); //odświeżenie widgetu
         }
 
         break;
@@ -208,6 +220,14 @@ void Drawer::undoButton()
 {
     if(sketches.size()>0)
     {
+        /*
+        if (sketches.back() == nullptr) {
+              std::cout << "Wskaznik jest pusty (NULL)." << std::endl;
+        }
+        else {
+            std::cout << "Wskaznik nie jest pusty." << std::endl;
+        }
+        */
         delete sketches.back(); //usuwam obiekt
         sketches.pop_back(); //usuwam wskaznik na obiekt a nie sam obiekt bez powyzszej linjki nie wywola by sie destruktor
         redrawAll(sketches);
@@ -264,7 +284,6 @@ void Drawer::bSplineButton()
 void Drawer::scanLineButton(){
     cout<<"wybrano scan line"<<endl;
     menuMode = scanLineSelected;
-    scanLine = new ScanLine(&im2);
 }
 
 
