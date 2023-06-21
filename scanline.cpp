@@ -66,7 +66,6 @@ ScanLine* ScanLine::drawScanLine(QRgb colorRGB)
         x.clear(); // Wyczyść wektor x
     }
 
-
     return this;
 }
 

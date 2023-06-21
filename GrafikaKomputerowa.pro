@@ -15,6 +15,7 @@ SOURCES += \
     bspline.cpp \
     bsplinecreator.cpp \
     circle.cpp \
+    colorspaces.cpp \
     curvecreator.cpp \
     drawer.cpp \
     floodfill.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     bspline.h \
     bsplinecreator.h \
     circle.h \
+    colorspaces.h \
     curvecreator.h \
     drawer.h \
     floodfill.h \

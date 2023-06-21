@@ -34,6 +34,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) , ui(new Ui::MainW
 
     connect(ui->ScanLineButton,SIGNAL(clicked()),ui->widget,SLOT(scanLineButton()));
     ui->ScanLineButton->setStyleSheet("QPushButton { background-color: white; font-weight: bold; border: 2px solid black;} \QPushButton:hover { background-color: rgba(255, 255, 255, 0.4);}");
+
+    //RGBSpace
+    connect(ui->RedSlider,SIGNAL(valueChanged(int)),ui->widget,SLOT(redSlider(int)));
+    ui->RedSlider->setRange(0,255);
+    connect(ui->GreenSlider,SIGNAL(valueChanged(int)),ui->widget,SLOT(greenSlider(int)));
+    ui->GreenSlider->setRange(0,255);
+    connect(ui->BlueSlider,SIGNAL(valueChanged(int)),ui->widget,SLOT(blueSlider(int)));
+    ui->BlueSlider->setRange(0,255);
+    //HSVSpace
+    connect(ui->HueSlider,SIGNAL(valueChanged(int)),ui->widget,SLOT(hueSlider(int)));
+    ui->HueSlider->setRange(0,255);
+    connect(ui->SaturationSlider,SIGNAL(valueChanged(int)),ui->widget,SLOT(saturationSlide(int)));
+    ui->SaturationSlider->setRange(0,255);
+    connect(ui->ValueSlider,SIGNAL(valueChanged(int)),ui->widget,SLOT(valueSlider(int)));
+    ui->ValueSlider->setRange(0,255);
 }
 
 MainWindow::~MainWindow()

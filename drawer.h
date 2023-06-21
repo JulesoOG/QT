@@ -7,6 +7,7 @@
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QColorDialog>
+#include <QSlider>
 
 #include <iostream>
 
@@ -25,6 +26,7 @@
 #include "bsplinecreator.h"
 #include "floodfill.h"
 #include "scanline.h"
+#include "colorspaces.h"
 
 using namespace std;
 
@@ -43,7 +45,6 @@ protected:
     void mouseMoveEvent(QMouseEvent *e);
     void mousePressEvent(QMouseEvent *e);
     void mouseReleaseEvent(QMouseEvent *e);
-
 
 private slots:
 
@@ -71,9 +72,10 @@ private:
     BezierCreator *bezierCreator;
     BSplineCreator *bSplineCreator;
     ScanLine *scanLine;
+    ColorSpaces *colorSpaces;
 
 public slots:
-    //guziki
+    //button
     void undoButton();
     void colorButton();
     void pixelButton();
@@ -84,6 +86,13 @@ public slots:
     void shapeInCircleButton();
     void bSplineButton();
     void scanLineButton();
+    //slider
+    void redSlider(int n);
+    void greenSlider(int n);
+    void blueSlider(int n);
+    void hueSlider(int n);
+    void saturationSlider(int n);
+    void valueSlider(int n);
 signals:
 
 };

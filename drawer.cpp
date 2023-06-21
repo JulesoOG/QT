@@ -13,8 +13,9 @@ Drawer::Drawer(QWidget *parent) : QWidget{parent}
     setMouseTracking(true);
 
     scanLine = new ScanLine(&im2);
+    colorSpaces = new ColorSpaces(&im2);
 
-    new ShapeInCircle(QPoint(10,10),QPoint(150,150), 16,brashColorRGB,&im);
+    //new ShapeInCircle(QPoint(10,10),QPoint(150,150), 16,brashColorRGB,&im);
 }
 /*
 Drawer::~Drawer()
@@ -116,41 +117,6 @@ void Drawer::mousePressEvent(QMouseEvent *e){
     }
 }
 
-void Drawer::mouseReleaseEvent(QMouseEvent *e){
-
-    Sketch* newSketch;
-
-    switch (menuMode)
-    {
-    case pixelSelected:
-
-        break;
-    case lineSelected:
-        newSketch = new Line(m_startPos, m_endPos,brashColorRGB,&im2);
-        im = im2;
-        sketches.push_back(newSketch); //emplace_back
-        //cout<<"sketches.emplace_back(*newSketch)"<<endl;
-        update();
-        break;
-    case circleSelected:
-
-        newSketch = new Circle(m_startPos, m_endPos,brashColorRGB, &im2);
-        im = im2;
-        sketches.push_back(newSketch);
-        update();
-
-        break;
-    case shapeInCircleSelected:
-        m_endPos=e->pos();
-        newSketch = new ShapeInCircle(m_startPos, m_endPos, 6, brashColorRGB, &im2);
-        im = im2;
-        sketches.push_back(newSketch);
-        update();
-
-        break;
-
-    }
-}
 
 void Drawer::mouseMoveEvent(QMouseEvent *e)
 {
@@ -207,6 +173,43 @@ void Drawer::mouseMoveEvent(QMouseEvent *e)
         break;
     }
 
+}
+
+
+void Drawer::mouseReleaseEvent(QMouseEvent *e){
+
+    Sketch* newSketch;
+
+    switch (menuMode)
+    {
+    case pixelSelected:
+
+        break;
+    case lineSelected:
+        newSketch = new Line(m_startPos, m_endPos,brashColorRGB,&im2);
+        im = im2;
+        sketches.push_back(newSketch); //emplace_back
+        //cout<<"sketches.emplace_back(*newSketch)"<<endl;
+        update();
+        break;
+    case circleSelected:
+
+        newSketch = new Circle(m_startPos, m_endPos,brashColorRGB, &im2);
+        im = im2;
+        sketches.push_back(newSketch);
+        update();
+
+        break;
+    case shapeInCircleSelected:
+        m_endPos=e->pos();
+        newSketch = new ShapeInCircle(m_startPos, m_endPos, 6, brashColorRGB, &im2);
+        im = im2;
+        sketches.push_back(newSketch);
+        update();
+
+        break;
+
+    }
 }
 
 void Drawer::redrawAll(vector<Sketch*> skeachesToRedraw)
@@ -287,3 +290,42 @@ void Drawer::scanLineButton(){
 }
 
 
+void Drawer::redSlider(int n){
+    cout<<"R: "<<n<<endl;
+    colorSpaces->RGBSpace(n,0,0);
+    im=im2;
+    update();
+}
+
+void Drawer::greenSlider(int n){
+    cout<<"G: "<<n<<endl;
+    colorSpaces->RGBSpace(0,n,0);
+    im=im2;
+    update();
+}
+void Drawer::blueSlider(int n){
+    cout<<"B: "<<n<<endl;
+    colorSpaces->RGBSpace(0,0,n);
+    im=im2;
+    update();
+}
+
+void Drawer::hueSlider(int n){
+    //cout<<"H: "<<n<<endl;
+    colorSpaces->HSVSpace(n,0,0);
+    im=im2;
+    update();
+}
+void Drawer::saturationSlider(int n){
+    //cout<<"S: "<<n<<endl;
+    colorSpaces->HSVSpace(0,n,0);
+    im=im2;
+    update();
+}
+
+void Drawer::valueSlider(int n){
+    //cout<<"V: "<<n<<endl;
+    colorSpaces->HSVSpace(0,0,n);
+    im=im2;
+    update();
+}
